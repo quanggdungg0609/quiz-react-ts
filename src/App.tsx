@@ -8,8 +8,7 @@ import QuestionCard from './components/QuestionCard';
 //types
 import {Diffuculty, QuestionsState} from './scripts/handleAPI'
 //styles
-import { GlobalStyle, Wrapper } from './styles/App.style';
-
+import './styles/App.scss'
 
 const TOTAL_QUESTION =10
 
@@ -32,7 +31,6 @@ function App() {
   const [score, setScore]=useState(0)
   const [gameOver, setGameOver]=useState(true)
 
-
   const startQuizz= async ()=>{
     setLoading(true)
     setGameOver(false)
@@ -53,9 +51,35 @@ function App() {
       const answer = e.currentTarget.value
       //check answer
       const correct =questions[number].correct_answer===answer
+      const parentElement=e.currentTarget.parentElement
+      //if correct increase score
       if (correct){
         setScore(prev=>prev+1)
       }
+      //find the correct and set background color green, else red
+      if (parentElement){
+        const answerList= parentElement.childNodes
+        Array.from(answerList).forEach((answerNode: Node)=>{
+          const button= answerNode as HTMLButtonElement
+          // const isCorrectAnswer= button.value===questions[number].correct_answer
+          if (button.value === questions[number].correct_answer){
+            button.classList.add('correct')
+          }
+          else{
+            button.classList.add('incorrect')
+          }
+          //surround the selected answer of user
+          if (button===e.currentTarget){
+            button.classList.add('user-selected')
+            console.log(button)
+          }
+        })
+      }
+      
+      
+     
+
+      
       //save answer in the array for user answer
       const answerObject={
         question: questions[number].question,
@@ -79,9 +103,7 @@ function App() {
   }
 
   return (
-    <>
-      <GlobalStyle/>
-      <Wrapper>
+      <div className='App'>
       <h1> React quiz</h1>
       {gameOver || userAnswers.length===TOTAL_QUESTION ? (<button className='start' onClick={startQuizz}> Start </button>): null}
       {!gameOver ? (<p className='score'>Score: {score}</p>): null}
@@ -99,8 +121,8 @@ function App() {
         (<button className='next'  onClick={nextQuestion}>Next Question</button>):null
       }
       
-    </Wrapper>
-    </>
+    </div>
+
     
   );
 }

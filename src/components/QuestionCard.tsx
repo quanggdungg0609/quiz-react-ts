@@ -1,7 +1,6 @@
 import React from 'react'
-import { NumberLiteralType } from 'typescript';
 //styles
-import {Wrapper, ButtonWrapper} from '../styles/QuestionCard.style'
+import '../styles/QuestionCard.scss'
 //types
 import { AnswerObject } from '../App';
 
@@ -16,27 +15,21 @@ type Props={
 
 const QuestionCard: React.FC<Props> = ({question, answers, callback, userAnswer, questionNumber, totalQuestion}) => {
   return (
-    <Wrapper>
+    <div className='question-card'>
         <p className='number'>
             Question: { questionNumber} / {totalQuestion}
         </p>
         <p dangerouslySetInnerHTML={{__html: question}}/>
-        <div>
+        <div className='answers'>
             {answers.map(answer=>{
                 return (
-                <ButtonWrapper
-                    key={answer}
-                    correct={userAnswer?.correctAnswer===answer}
-                    userClicked={userAnswer?.answer===answer}     
-                >
-                    <button disabled={userAnswer? true: false} onClick={callback} value={answer}>
+                    <button key={answer} disabled={userAnswer? true: false} onClick={callback} value={answer}>
                         <span dangerouslySetInnerHTML={{__html: answer}}/>
                     </button>
-                </ButtonWrapper>
                 )
             })}
         </div>
-    </Wrapper>
+    </div>
   )
 }
 
