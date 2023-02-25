@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-typescript-quiz/static/css/main.47bea8f2.css",
+    "main.js": "/react-typescript-quiz/static/js/main.9495d7f4.js",
+    "index.html": "/react-typescript-quiz/index.html",
+    "main.47bea8f2.css.map": "/react-typescript-quiz/static/css/main.47bea8f2.css.map",
+    "main.9495d7f4.js.map": "/react-typescript-quiz/static/js/main.9495d7f4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.47bea8f2.css",
+    "static/js/main.9495d7f4.js"
+  ]
+}
